@@ -42,7 +42,7 @@ class HomeItemCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(14),
                 ),
                 child: Icon(
-                  IconData(item.iconData, fontFamily: 'MaterialIcons'),
+                  item.icon,
                   color: itemColor,
                   size: 28,
                 ),
