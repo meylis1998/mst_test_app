@@ -69,7 +69,6 @@ lib/
 
 **Функциональность:**
 - Интеграция с реальным API (RevenueCat/Adapty для подписок)
-- Локализация (l10n)
 - Deep linking
 - Analytics (Firebase/Amplitude)
 - Crash reporting (Sentry/Crashlytics)
