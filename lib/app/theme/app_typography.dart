@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// Application typography styles.
 abstract class AppTypography {
-  // Display styles
   static const TextStyle displayLarge = TextStyle(
     fontSize: 57,
     fontWeight: FontWeight.w400,
@@ -22,7 +20,6 @@ abstract class AppTypography {
     height: 1.22,
   );
 
-  // Headline styles
   static const TextStyle headlineLarge = TextStyle(
     fontSize: 32,
     fontWeight: FontWeight.w400,
@@ -41,7 +38,6 @@ abstract class AppTypography {
     height: 1.33,
   );
 
-  // Title styles
   static const TextStyle titleLarge = TextStyle(
     fontSize: 22,
     fontWeight: FontWeight.w500,
@@ -62,7 +58,6 @@ abstract class AppTypography {
     height: 1.43,
   );
 
-  // Body styles
   static const TextStyle bodyLarge = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w400,
@@ -84,7 +79,6 @@ abstract class AppTypography {
     height: 1.33,
   );
 
-  // Label styles
   static const TextStyle labelLarge = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w500,

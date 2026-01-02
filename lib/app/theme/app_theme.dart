@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mst_test_app/app/theme/app_colors.dart';
 import 'package:mst_test_app/app/theme/app_typography.dart';
 
-/// Application theme configuration.
 abstract class AppTheme {
-  /// Light theme.
   static ThemeData get light => ThemeData(
         useMaterial3: true,
         brightness: Brightness.light,
@@ -103,7 +101,6 @@ abstract class AppTheme {
         ),
       );
 
-  /// Dark theme.
   static ThemeData get dark => ThemeData(
         useMaterial3: true,
         brightness: Brightness.dark,

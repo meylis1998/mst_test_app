@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 
-/// Interceptor for logging HTTP requests and responses.
 class LoggingInterceptor extends Interceptor {
   LoggingInterceptor(this._logger);
 

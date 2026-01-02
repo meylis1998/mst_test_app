@@ -7,7 +7,6 @@ import 'package:mst_test_app/shared/data/datasources/local_storage.dart';
 part 'theme_event.dart';
 part 'theme_state.dart';
 
-/// BLoC for managing application theme.
 class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
   ThemeBloc({required LocalStorage localStorage})
       : _localStorage = localStorage,

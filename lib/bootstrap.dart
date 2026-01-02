@@ -8,7 +8,6 @@ import 'package:logger/logger.dart';
 import 'package:mst_test_app/core/di/injection_container.dart';
 import 'package:path_provider/path_provider.dart';
 
-/// Custom BlocObserver for logging bloc events.
 class AppBlocObserver extends BlocObserver {
   AppBlocObserver({required Logger logger}) : _logger = logger;
 
@@ -28,7 +27,11 @@ class AppBlocObserver extends BlocObserver {
 
   @override
   void onError(BlocBase<dynamic> bloc, Object error, StackTrace stackTrace) {
-    _logger.e('onError -- ${bloc.runtimeType}', error: error, stackTrace: stackTrace);
+    _logger.e(
+      'onError -- ${bloc.runtimeType}',
+      error: error,
+      stackTrace: stackTrace,
+    );
     super.onError(bloc, error, stackTrace);
   }
 
@@ -39,29 +42,20 @@ class AppBlocObserver extends BlocObserver {
   }
 }
 
-/// Bootstraps the application.
-///
-/// Initializes all required services and dependencies before running the app.
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
-  // Ensure Flutter bindings are initialized
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize Hive
   await Hive.initFlutter();
 
-  // Initialize HydratedBloc storage
   final appDocDir = await getApplicationDocumentsDirectory();
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: HydratedStorageDirectory(appDocDir.path),
   );
 
-  // Initialize dependencies
   await initDependencies();
 
-  // Set up BlocObserver
   Bloc.observer = AppBlocObserver(logger: sl<Logger>());
 
-  // Handle Flutter errors
   FlutterError.onError = (details) {
     sl<Logger>().e(
       'FlutterError',
@@ -73,6 +67,5 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
     }
   };
 
-  // Run the app
   runApp(await builder());
 }

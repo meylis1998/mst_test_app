@@ -1,6 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Abstract class for local storage operations.
 abstract class LocalStorage {
   Future<bool> setString(String key, String value);
   String? getString(String key);
@@ -17,7 +16,6 @@ abstract class LocalStorage {
   bool containsKey(String key);
 }
 
-/// Implementation of [LocalStorage] using SharedPreferences.
 class LocalStorageImpl implements LocalStorage {
   LocalStorageImpl(this._prefs);
 

@@ -1,4 +1,3 @@
-/// Exception thrown when a server error occurs.
 class ServerException implements Exception {
   const ServerException({this.message, this.statusCode});
 
@@ -10,7 +9,6 @@ class ServerException implements Exception {
       'ServerException(message: $message, statusCode: $statusCode)';
 }
 
-/// Exception thrown when there is no internet connection.
 class NetworkException implements Exception {
   const NetworkException({this.message = 'No internet connection'});
 
@@ -20,7 +18,6 @@ class NetworkException implements Exception {
   String toString() => 'NetworkException(message: $message)';
 }
 
-/// Exception thrown when cached data is not found.
 class CacheException implements Exception {
   const CacheException({this.message = 'Cache not found'});
 
@@ -30,7 +27,6 @@ class CacheException implements Exception {
   String toString() => 'CacheException(message: $message)';
 }
 
-/// Exception thrown when authentication fails.
 class AuthException implements Exception {
   const AuthException({this.message = 'Authentication failed'});
 
@@ -40,7 +36,6 @@ class AuthException implements Exception {
   String toString() => 'AuthException(message: $message)';
 }
 
-/// Exception thrown when validation fails.
 class ValidationException implements Exception {
   const ValidationException({required this.errors});
 

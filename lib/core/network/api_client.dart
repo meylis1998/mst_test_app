@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:mst_test_app/core/constants/api_constants.dart';
 
-/// Factory for creating configured Dio instances.
 class ApiClient {
   ApiClient({
     List<Interceptor>? interceptors,
@@ -26,10 +25,8 @@ class ApiClient {
 
   late final Dio _dio;
 
-  /// Returns the configured Dio instance.
   Dio get dio => _dio;
 
-  /// Performs a GET request.
   Future<Response<T>> get<T>(
     String path, {
     Map<String, dynamic>? queryParameters,
@@ -42,7 +39,6 @@ class ApiClient {
     );
   }
 
-  /// Performs a POST request.
   Future<Response<T>> post<T>(
     String path, {
     dynamic data,
@@ -57,7 +53,6 @@ class ApiClient {
     );
   }
 
-  /// Performs a PUT request.
   Future<Response<T>> put<T>(
     String path, {
     dynamic data,
@@ -72,7 +67,6 @@ class ApiClient {
     );
   }
 
-  /// Performs a PATCH request.
   Future<Response<T>> patch<T>(
     String path, {
     dynamic data,
@@ -87,7 +81,6 @@ class ApiClient {
     );
   }
 
-  /// Performs a DELETE request.
   Future<Response<T>> delete<T>(
     String path, {
     dynamic data,

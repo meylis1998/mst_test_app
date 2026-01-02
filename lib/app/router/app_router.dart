@@ -1,23 +1,72 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mst_test_app/app/router/routes.dart';
 
-/// Application router configuration.
+import 'package:mst_test_app/app/router/routes.dart';
+import 'package:mst_test_app/features/onboarding/domain/repositories/onboarding_repository.dart';
+import 'package:mst_test_app/features/onboarding/presentation/pages/onboarding_page.dart';
+import 'package:mst_test_app/features/paywall/domain/repositories/subscription_repository.dart';
+import 'package:mst_test_app/features/paywall/presentation/pages/paywall_page.dart';
+
 class AppRouter {
-  AppRouter();
+  AppRouter({
+    required OnboardingRepository onboardingRepository,
+    required SubscriptionRepository subscriptionRepository,
+  })  : _onboardingRepository = onboardingRepository,
+        _subscriptionRepository = subscriptionRepository;
+
+  final OnboardingRepository _onboardingRepository;
+  final SubscriptionRepository _subscriptionRepository;
 
   late final GoRouter router = GoRouter(
     initialLocation: Routes.initial,
     debugLogDiagnostics: true,
     routes: _routes,
+    redirect: _redirect,
     errorBuilder: _errorBuilder,
   );
+
+  Future<String?> _redirect(BuildContext context, GoRouterState state) async {
+    final isOnboardingCompleted =
+        await _onboardingRepository.isOnboardingCompleted();
+    final isSubscribed = await _subscriptionRepository.isSubscribed();
+    final currentLocation = state.matchedLocation;
+
+    if (currentLocation == Routes.initial) {
+      if (!isOnboardingCompleted) {
+        return Routes.onboarding;
+      }
+      if (!isSubscribed) {
+        return Routes.paywall;
+      }
+      return Routes.home;
+    }
+
+    if (currentLocation == Routes.onboarding && isOnboardingCompleted) {
+      return isSubscribed ? Routes.home : Routes.paywall;
+    }
+
+    if (currentLocation == Routes.paywall && isSubscribed) {
+      return Routes.home;
+    }
+
+    return null;
+  }
 
   List<RouteBase> get _routes => [
         GoRoute(
           path: Routes.initial,
           name: RouteNames.initial,
-          builder: (context, state) => const _PlaceholderPage(title: 'Home'),
+          builder: (context, state) => const SizedBox.shrink(),
+        ),
+        GoRoute(
+          path: Routes.onboarding,
+          name: RouteNames.onboarding,
+          builder: (context, state) => const OnboardingPage(),
+        ),
+        GoRoute(
+          path: Routes.paywall,
+          name: RouteNames.paywall,
+          builder: (context, state) => const PaywallPage(),
         ),
         GoRoute(
           path: Routes.login,
@@ -71,7 +120,6 @@ class AppRouter {
   }
 }
 
-/// Placeholder page for routes that haven't been implemented yet.
 class _PlaceholderPage extends StatelessWidget {
   const _PlaceholderPage({required this.title});
 

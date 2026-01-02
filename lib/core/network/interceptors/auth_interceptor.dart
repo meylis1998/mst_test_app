@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:mst_test_app/core/constants/app_constants.dart';
 
-/// Interceptor for adding authentication headers to requests.
 class AuthInterceptor extends Interceptor {
   AuthInterceptor(this._secureStorage);
 
@@ -24,8 +23,6 @@ class AuthInterceptor extends Interceptor {
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
-    // Handle 401 unauthorized errors here if needed
-    // You can implement token refresh logic here
     handler.next(err);
   }
 }
