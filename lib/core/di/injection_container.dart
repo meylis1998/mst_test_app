@@ -14,6 +14,12 @@ import 'package:mst_test_app/features/onboarding/domain/repositories/onboarding_
 import 'package:mst_test_app/features/onboarding/domain/usecases/check_onboarding_completed.dart';
 import 'package:mst_test_app/features/onboarding/domain/usecases/complete_onboarding.dart';
 import 'package:mst_test_app/features/onboarding/presentation/bloc/onboarding_bloc.dart';
+import 'package:mst_test_app/features/home/data/datasources/home_local_datasource.dart';
+import 'package:mst_test_app/features/home/data/repositories/home_repository_impl.dart';
+import 'package:mst_test_app/features/home/domain/repositories/home_repository.dart';
+import 'package:mst_test_app/features/home/domain/usecases/get_home_items.dart';
+import 'package:mst_test_app/features/home/domain/usecases/refresh_home_items.dart';
+import 'package:mst_test_app/features/home/presentation/bloc/home_bloc.dart';
 import 'package:mst_test_app/features/paywall/data/datasources/subscription_local_datasource.dart';
 import 'package:mst_test_app/features/paywall/data/repositories/subscription_repository_impl.dart';
 import 'package:mst_test_app/features/paywall/domain/repositories/subscription_repository.dart';
@@ -88,6 +94,7 @@ void _initBlocs() {
 void _initFeatures() {
   _initOnboarding();
   _initPaywall();
+  _initHome();
 }
 
 void _initOnboarding() {
@@ -123,6 +130,26 @@ void _initPaywall() {
     () => PaywallBloc(
       getSubscriptionPlans: sl(),
       purchaseSubscription: sl(),
+    ),
+  );
+}
+
+void _initHome() {
+  sl.registerLazySingleton<HomeLocalDatasource>(
+    HomeLocalDatasourceImpl.new,
+  );
+
+  sl.registerLazySingleton<HomeRepository>(
+    () => HomeRepositoryImpl(sl()),
+  );
+
+  sl.registerLazySingleton(() => GetHomeItems(sl()));
+  sl.registerLazySingleton(() => RefreshHomeItems(sl()));
+
+  sl.registerFactory<HomeBloc>(
+    () => HomeBloc(
+      getHomeItems: sl(),
+      refreshHomeItems: sl(),
     ),
   );
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:mst_test_app/app/router/routes.dart';
+import 'package:mst_test_app/features/home/presentation/pages/home_page.dart';
 import 'package:mst_test_app/features/onboarding/domain/repositories/onboarding_repository.dart';
 import 'package:mst_test_app/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:mst_test_app/features/paywall/domain/repositories/subscription_repository.dart';
@@ -81,7 +82,7 @@ class AppRouter {
         GoRoute(
           path: Routes.home,
           name: RouteNames.home,
-          builder: (context, state) => const _PlaceholderPage(title: 'Home'),
+          builder: (context, state) => const HomePage(),
         ),
         GoRoute(
           path: Routes.settings,
