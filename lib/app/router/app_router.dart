@@ -70,24 +70,9 @@ class AppRouter {
           builder: (context, state) => const PaywallPage(),
         ),
         GoRoute(
-          path: Routes.login,
-          name: RouteNames.login,
-          builder: (context, state) => const _PlaceholderPage(title: 'Login'),
-        ),
-        GoRoute(
-          path: Routes.register,
-          name: RouteNames.register,
-          builder: (context, state) => const _PlaceholderPage(title: 'Register'),
-        ),
-        GoRoute(
           path: Routes.home,
           name: RouteNames.home,
           builder: (context, state) => const HomePage(),
-        ),
-        GoRoute(
-          path: Routes.settings,
-          name: RouteNames.settings,
-          builder: (context, state) => const _PlaceholderPage(title: 'Settings'),
         ),
       ];
 
@@ -113,43 +98,6 @@ class AppRouter {
             ElevatedButton(
               onPressed: () => context.go(Routes.initial),
               child: const Text('Go Home'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _PlaceholderPage extends StatelessWidget {
-  const _PlaceholderPage({required this.title});
-
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(title)),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.construction,
-              size: 64,
-              color: Theme.of(context).colorScheme.primary,
-            ),
-            const SizedBox(height: 16),
-            Text(
-              '$title Page',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            const SizedBox(height: 8),
-            Text(
-              'This page is under construction',
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurface.withAlpha(153),
-                  ),
             ),
           ],
         ),

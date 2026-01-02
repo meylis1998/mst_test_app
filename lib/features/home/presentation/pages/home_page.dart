@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
-import 'package:mst_test_app/app/router/routes.dart';
 import 'package:mst_test_app/core/di/injection_container.dart';
 import 'package:mst_test_app/features/home/presentation/bloc/home_bloc.dart';
 import 'package:mst_test_app/features/home/presentation/widgets/home_empty_state.dart';
@@ -33,12 +31,6 @@ class _HomeView extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Home'),
         centerTitle: false,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.settings_outlined),
-            onPressed: () => context.push(Routes.settings),
-          ),
-        ],
       ),
       body: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {

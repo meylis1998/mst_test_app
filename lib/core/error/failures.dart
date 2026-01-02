@@ -21,10 +21,6 @@ class CacheFailure extends Failure {
   const CacheFailure({super.message = 'Cache error occurred'});
 }
 
-class AuthFailure extends Failure {
-  const AuthFailure({super.message = 'Authentication failed'});
-}
-
 class ValidationFailure extends Failure {
   const ValidationFailure({
     super.message = 'Validation failed',

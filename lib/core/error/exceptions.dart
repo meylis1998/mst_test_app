@@ -27,15 +27,6 @@ class CacheException implements Exception {
   String toString() => 'CacheException(message: $message)';
 }
 
-class AuthException implements Exception {
-  const AuthException({this.message = 'Authentication failed'});
-
-  final String message;
-
-  @override
-  String toString() => 'AuthException(message: $message)';
-}
-
 class ValidationException implements Exception {
   const ValidationException({required this.errors});
 

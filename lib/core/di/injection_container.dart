@@ -1,11 +1,9 @@
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:mst_test_app/core/network/api_client.dart';
-import 'package:mst_test_app/core/network/interceptors/auth_interceptor.dart';
 import 'package:mst_test_app/core/network/interceptors/logging_interceptor.dart';
 import 'package:mst_test_app/core/network/network_info.dart';
 import 'package:mst_test_app/features/onboarding/data/datasources/onboarding_local_datasource.dart';
@@ -45,12 +43,6 @@ Future<void> _initExternal() async {
   final sharedPreferences = await SharedPreferences.getInstance();
   sl.registerSingleton<SharedPreferences>(sharedPreferences);
 
-  const secureStorage = FlutterSecureStorage(
-    aOptions: AndroidOptions(encryptedSharedPreferences: true),
-    iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock),
-  );
-  sl.registerSingleton<FlutterSecureStorage>(secureStorage);
-
   sl.registerLazySingleton<InternetConnection>(InternetConnection.new);
 
   sl.registerLazySingleton<Logger>(
@@ -78,7 +70,6 @@ void _initCore() {
   sl.registerLazySingleton<ApiClient>(
     () => ApiClient(
       interceptors: [
-        AuthInterceptor(sl()),
         LoggingInterceptor(sl()),
       ],
     ),
