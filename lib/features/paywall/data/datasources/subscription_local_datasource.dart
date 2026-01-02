@@ -5,6 +5,8 @@ import 'package:mst_test_app/shared/data/datasources/local_storage.dart';
 abstract class SubscriptionLocalDatasource {
   Future<bool> isSubscribed();
 
+  Future<SubscriptionPlanType?> getSubscriptionPlanType();
+
   Future<void> saveSubscription(SubscriptionPlanType planType);
 }
 
@@ -16,6 +18,16 @@ class SubscriptionLocalDatasourceImpl implements SubscriptionLocalDatasource {
   @override
   Future<bool> isSubscribed() async {
     return _localStorage.getBool(AppConstants.subscriptionStatusKey) ?? false;
+  }
+
+  @override
+  Future<SubscriptionPlanType?> getSubscriptionPlanType() async {
+    final planName = _localStorage.getString(AppConstants.subscriptionPlanKey);
+    if (planName == null) return null;
+    return SubscriptionPlanType.values.firstWhere(
+      (e) => e.name == planName,
+      orElse: () => SubscriptionPlanType.monthly,
+    );
   }
 
   @override

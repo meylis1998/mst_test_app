@@ -32,6 +32,11 @@ class SubscriptionRepositoryImpl implements SubscriptionRepository {
   }
 
   @override
+  Future<SubscriptionPlanType?> getSubscriptionPlanType() {
+    return _localDatasource.getSubscriptionPlanType();
+  }
+
+  @override
   Future<void> purchaseSubscription(SubscriptionPlanType planType) async {
     await Future<void>.delayed(const Duration(seconds: 1));
     await _localDatasource.saveSubscription(planType);

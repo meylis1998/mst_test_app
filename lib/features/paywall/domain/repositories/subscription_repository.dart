@@ -5,5 +5,7 @@ abstract class SubscriptionRepository {
 
   Future<bool> isSubscribed();
 
+  Future<SubscriptionPlanType?> getSubscriptionPlanType();
+
   Future<void> purchaseSubscription(SubscriptionPlanType planType);
 }
